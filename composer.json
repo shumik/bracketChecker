@@ -1,0 +1,17 @@
+{
+  "name": "shumik/bracketChecker",
+  "description": "Check string for correct brackets opening/closing",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Igor Ivanov",
+      "email": "shumi-ch@yandex.ru"
+    }
+  ],
+  "require": {
+    "php": ">=7.0"
+  },
+  "autoload": {
+    "classmap": ["src"]
+  }
+}
