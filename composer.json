@@ -1,7 +1,7 @@
 {
   "name": "shumik/bracket-checker",
   "description": "Check string for correct brackets opening/closing",
-  "license": "proprietary",
+  "license": "MIT",
   "authors": [
     {
       "name": "Igor Ivanov",
@@ -15,5 +15,4 @@
     "psr-4": {
       "\\BracketChecker\\": "src/"
     }
-  }
 }
