@@ -1,6 +1,7 @@
 <?php
 
 namespace BracketChecker;
+
 /**
  * Class BracketChecker
  *
@@ -8,47 +9,60 @@ namespace BracketChecker;
  */
 class BracketChecker
 {
-    private $stringToCheck;
+    public $stringToCheck;
     private $validatePattern = '/^[\(\)\s\n\r\t]+$/';
 
-    public function __construct(string $string)
+    public function setString(string $string)
     {
         $this->stringToCheck = $string;
-        $this->validateString();
+
+        return $this;
     }
 
+
     /**
-     * Checks string for correct bracket placement
+     * Calls private checks for string format and bracket depth
      *
+     * @throws \InvalidArgumentException
      * @return bool
      */
     public function check()
     {
-        $depth = 0;
-        for ($i = 0; $i <= strlen($this->stringToCheck) - 1; $i++) {
-            switch ($this->stringToCheck[$i]) {
-                case '(':
-                    $depth++;
-                    break;
-                case ')':
-                    $depth--;
-                    break;
-            }
-            if ($depth < 0) return False;
+        if (!$this->checkStringFormat()) {
+            throw new \InvalidArgumentException();
         }
-        return $depth == 0 ? True : False;
+
+        return $this->checkBrackets();
     }
 
     /**
      * Check if string contains illegal characters
      *
-     * @throws \InvalidArgumentException if check fails
+     * @return bool
      */
-    private function validateString()
+    private function checkStringFormat()
     {
-        if (preg_match($this->validatePattern, $this->stringToCheck) == 0) {
-            throw new \InvalidArgumentException('String contains invalid symbols');
+        return preg_match($this->validatePattern, $this->stringToCheck) == 1;
+    }
+
+    /**
+     * Check bracket depth
+     *
+     * @return bool
+     */
+    private function checkBrackets(){
+      $depth = 0;
+      for ($i = 0; $i <= strlen($this->stringToCheck) - 1; $i++) {
+        switch ($this->stringToCheck[$i]) {
+          case '(':
+            $depth++;
+            break;
+          case ')':
+            $depth--;
+            break;
         }
-        return True;
+        if ($depth < 0) return False;
+      }
+      return $depth == 0 ? True : False;
     }
 }
