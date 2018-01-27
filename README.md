@@ -1,5 +1,8 @@
-Library for checking valid brackets depth in string.
+Bracket checker
 ========================
+
+Library checks string format (only "()/s/r/t/n" are allowed) and bracket depth.
+ 
 Example:
 
     use \BracketChecker\BracketChecker;
