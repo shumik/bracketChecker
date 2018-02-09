@@ -1,5 +1,11 @@
 Library for checking valid brackets depth in string.
 ========================
+Install:
+    
+    composer require shumik/bracket-checker
+
+
+
 Example:
 
     use \BracketChecker\BracketChecker;
@@ -14,6 +20,7 @@ Example:
     } catch (InvalidArgumentException $e) {
         echo 'Invalid string format';
     }
+
 
 Tests:
 

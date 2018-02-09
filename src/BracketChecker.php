@@ -9,8 +9,19 @@ namespace BracketChecker;
  */
 class BracketChecker
 {
+    /**
+     * String to ckeck
+     *
+     * @var string
+     */
     public $stringToCheck;
-    private $validatePattern = '/^[\(\)\s\n\r\t]+$/';
+
+    /**
+     * Pattern to check string format
+     *
+     * @var string
+     */
+    private $stringFormatPattern = '/^[\(\)\s\n\r\t]+$/';
 
     public function setString(string $string)
     {
@@ -21,15 +32,16 @@ class BracketChecker
 
 
     /**
-     * Calls private checks for string format and bracket depth
+     * Calls string check methods
      *
-     * @throws \InvalidArgumentException
      * @return bool
+     *
+     * @throws InvalidStringException
      */
     public function check()
     {
         if (!$this->checkStringFormat()) {
-            throw new \InvalidArgumentException();
+            throw new InvalidStringException();
         }
 
         return $this->checkBrackets();
@@ -42,7 +54,7 @@ class BracketChecker
      */
     private function checkStringFormat()
     {
-        return preg_match($this->validatePattern, $this->stringToCheck) == 1;
+        return preg_match($this->stringFormatPattern, $this->stringToCheck) == 1;
     }
 
     /**
@@ -50,19 +62,21 @@ class BracketChecker
      *
      * @return bool
      */
-    private function checkBrackets(){
-      $depth = 0;
-      for ($i = 0; $i <= strlen($this->stringToCheck) - 1; $i++) {
-        switch ($this->stringToCheck[$i]) {
-          case '(':
-            $depth++;
-            break;
-          case ')':
-            $depth--;
-            break;
+    private function checkBrackets()
+    {
+        $depth = 0;
+        for ($i = 0; $i <= strlen($this->stringToCheck) - 1; $i++) {
+            switch ($this->stringToCheck[$i]) {
+                case '(':
+                    $depth++;
+                    break;
+                case ')':
+                    $depth--;
+                    break;
+            }
+            if ($depth < 0) return False;
         }
-        if ($depth < 0) return False;
-      }
-      return $depth == 0 ? True : False;
+
+        return $depth == 0 ? True : False;
     }
 }

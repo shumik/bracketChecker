@@ -1,9 +1,13 @@
 <?php
 
 use BracketChecker\BracketChecker;
+use BracketChecker\InvalidStringException;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class BracketCheckerTest
+ */
 class BracketCheckerTest extends TestCase
 {
 
@@ -29,7 +33,7 @@ class BracketCheckerTest extends TestCase
         $this->assertEquals($checker->check(), false);
 
         $checker->setString($stringInvalidFormat);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidStringException::class);
         $checker->check();
     }
 
