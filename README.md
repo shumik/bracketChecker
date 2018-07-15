@@ -6,6 +6,8 @@ Install:
 
 
 
+
+
 Example:
 
     use \BracketChecker\BracketChecker;
